@@ -1,4 +1,4 @@
 // API configuration
-const API_URL = 'https://url-shortener-api-0234.onrender.com';
+const API_URL = window.API_URL || 'http://localhost:3000';
 
 export { API_URL }; 
