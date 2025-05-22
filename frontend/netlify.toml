@@ -6,3 +6,11 @@
   from = "/*"
   to = "/index.html"
   status = 200 
+
+[build.environment]
+  API_URL = "https://url-shortener-api-0234.onrender.com"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*" 
