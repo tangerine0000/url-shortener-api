@@ -1,6 +1,8 @@
 import { API_URL } from './config.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('Frontend initialized with API URL:', API_URL);
+    
     // --- Shorten URL Section ---
     const longUrlInput = document.getElementById('longUrlInput');
     const shortenButton = document.getElementById('shortenButton');
@@ -15,15 +17,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
+            console.log('Sending request to:', `${API_URL}/shorten`);
             const response = await fetch(`${API_URL}/shorten`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 },
                 body: JSON.stringify({ url: longUrl }),
+                mode: 'cors'
             });
 
+            console.log('Response status:', response.status);
             const data = await response.json();
+            console.log('Response data:', data);
 
             if (response.ok) {
                 shortenedUrlOutput.textContent = `Short URL: ${data.shortUrl}`;
@@ -33,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 shortenedUrlOutput.style.color = 'red';
             }
         } catch (error) {
-            console.error('Error shortening URL:', error);
+            console.error('Error details:', error);
             shortenedUrlOutput.textContent = 'An error occurred while connecting to the server.';
             shortenedUrlOutput.style.color = 'red';
         }
@@ -53,8 +60,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            const response = await fetch(`${API_URL}/shorten/${shortCode}/stats`);
+            console.log('Sending request to:', `${API_URL}/shorten/${shortCode}/stats`);
+            const response = await fetch(`${API_URL}/shorten/${shortCode}/stats`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json'
+                },
+                mode: 'cors'
+            });
+
+            console.log('Response status:', response.status);
             const data = await response.json();
+            console.log('Response data:', data);
 
             if (response.ok) {
                 statsOutput.textContent = JSON.stringify(data, null, 2);
@@ -64,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 statsOutput.style.color = 'red';
             }
         } catch (error) {
-            console.error('Error getting stats:', error);
+            console.error('Error details:', error);
             statsOutput.textContent = 'An error occurred while connecting to the server.';
             statsOutput.style.color = 'red';
         }

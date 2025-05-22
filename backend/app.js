@@ -21,7 +21,9 @@ const getBaseUrl = () => {
 
 // Enable CORS with specific origin
 app.use(cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:5000',
+    origin: process.env.FRONTEND_URL || '*', // Allow all origins in development
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Accept'],
     credentials: true
 }));
 
@@ -219,6 +221,13 @@ app.get('/shorten/:shortCode/stats', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 })
+
+// Add error handling middleware
+app.use((err, req, res, next) => {
+    console.error('Error:', err);
+    res.status(500).json({ error: 'Internal Server Error', details: err.message });
+});
+
 app.listen(port, () => {
     console.log(`Server listening at ${getBaseUrl()}`);
 });
