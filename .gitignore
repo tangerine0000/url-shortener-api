@@ -10,6 +10,10 @@ yarn-error.log
 .env.*.local
 backend/.env
 
+# Build output
+dist/
+build/
+
 # IDE
 .idea/
 .vscode/
@@ -31,4 +35,7 @@ yarn-error.log*
 pids
 *.pid
 *.seed
-*.pid.lock 
+*.pid.lock
+
+# Local configuration
+frontend/config.local.js 
