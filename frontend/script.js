@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Extract the short code from the backend URL
                 const shortCode = data.shortUrl.split('/').pop();
                 // Create the frontend URL
-                const frontendUrl = `https://tanurl.netlify.app/${shortCode}`;
+                const frontendUrl = `https://url-shortener-api-0234.onrender.com/${shortCode}`;
                 shortenedUrlOutput.textContent = `Short URL: ${frontendUrl}`;
                 shortenedUrlOutput.style.color = 'green';
             } else {
