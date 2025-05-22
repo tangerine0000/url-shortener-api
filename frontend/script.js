@@ -33,7 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Response data:', data);
 
             if (response.ok) {
-                shortenedUrlOutput.textContent = `Short URL: ${data.shortUrl}`;
+                // Extract the short code from the backend URL
+                const shortCode = data.shortUrl.split('/').pop();
+                // Create the frontend URL
+                const frontendUrl = `https://tanurl.netlify.app/${shortCode}`;
+                shortenedUrlOutput.textContent = `Short URL: ${frontendUrl}`;
                 shortenedUrlOutput.style.color = 'green';
             } else {
                 shortenedUrlOutput.textContent = `Error: ${data.error || 'Something went wrong'}`;
