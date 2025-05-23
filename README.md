@@ -2,6 +2,9 @@
 
 A RESTful API service that shortens long URLs into more manageable short URLs. Built with Node.js, Express, and MongoDB.
 
+## Project URL
+https://roadmap.sh/projects/url-shortening-service
+
 ## Features
 
 - Create short URLs from long URLs
